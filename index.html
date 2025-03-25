@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Masters Premium - Subscription Plans</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background-color: #fcf9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(90deg, #00d4ff, #0078ff);
+            color: white;
+            font-size: 1.5rem;
+        }
+        .plans {
+            padding: 20px;
+        }
+        .plan {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #000;
+            color: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 2px solid #00d4ff;
+            position: relative;
+        }
+        .plan h3 {
+            margin: 0;
+            font-size: 1rem;
+        }
+        .plan h4 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        .plan .discount {
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: #ff3e3e;
+            color: white;
+            font-size: 0.8rem;
+            padding: 3px 8px;
+            border-radius: 12px;
+        }
+        .plan button {
+            background: #00d4ff;
+            color: black;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .plan button:hover {
+            background: #0078ff;
+            color: white;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+        }
+        .modal input {
+            margin: 10px;
+            padding: 10px;
+            width: 90%;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .modal button {
+            background: #00d4ff;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .modal button:hover {
+            background: #0078ff;
+        }
+
+        .confirmation-message {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1.1rem;
+            color: #00d4ff;
+            display: none;
+        }
+
+        .channel-logo {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .channel-logo img {
+            width: 80px;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        .qrContainer {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #paymentNote {
+        font-size: 14px; /* Adjust text size */
+        margin-top: 10px; /* Adds spacing between QR code and text */
+        color: #8a2be2; /* Violet color */
+    }
+
+        @media (max-width: 768px) {
+            .channel-logo img {
+                width: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Trade Masters Premium</div>
+        <div class="plans">
+            <p>Select the plan and proceed for payment:</p>
+
+            <div class="plan">
+                <div>
+                    <h3>Weekly</h3>
+                    <p>1 Week</p>
+                </div>
+                <div>
+                    <h4>&#8377;449.00</h4>
+                    <button onclick="showInputForm('weekly', 449)">BUY</button>
+                </div>
+                <div class="discount">50.13% OFF</div>
+            </div>
+            <div class="plan">
+                <div>
+                    <h3>Monthly</h3>
+                    <p>1 Month</p>
+                </div>
+                <div>
+                    <h4>&#8377;999.00</h4>
+                    <button onclick="showInputForm('monthly', 999)">BUY</button>
+                </div>
+                <div class="discount">65.01% OFF</div>
+            </div>
+
+            <div class="plan">
+                <div>
+                    <h3>Half Yearly</h3>
+                    <p>6 Months</p>
+                </div>
+                <div>
+                    <h4>&#8377;2999.00</h4>
+                    <button onclick="showInputForm('half-yearly', 2999)">BUY</button>
+                </div>
+                <div class="discount">66.65% OFF</div>
+            </div>
+
+            <div class="plan">
+                <div>
+                    <h3>Yearly</h3>
+                    <p>12 Months</p>
+                </div>
+                <div>
+                    <h4>&#8377;3999.00</h4>
+                    <button onclick="showInputForm('yearly', 3999)">BUY</button>
+                </div>
+                <div class="discount">68.39% OFF</div>
+            </div>
+
+            <div class="plan">
+                <div>
+                    <h3>Lifetime</h3>
+                    <p>Lifetime</p>
+                </div>
+                <div>
+                    <h4>&#8377;5999.00</h4>
+                    <button onclick="showInputForm('lifetime', 5999)">BUY</button>
+                </div>
+                <div class="discount">70.55% OFF</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal for user input -->
+    <div id="userInputModal" class="modal">
+        <div class="modal-content">
+            <h3>Please enter your details:</h3>
+            <input type="text" id="userName" placeholder="Enter your name" required>
+            <input type="text" id="userMobile" placeholder="Enter your mobile number" required>
+            <button onclick="validateAndSubmit()">Submit</button>
+        </div>
+    </div>
+
+    <div id="confirmationMessage" class="confirmation-message">
+        
+        <div class="channel-logo">
+            <img src="static/images/logo.png" alt="Channel Logo">
+        </div>
+        <p id="paymentNote" style="margin: 10px; color: #8a2be2; text-align: bottom;"> Please send the payment screenshot to <a href="https://t.me/Neel_209" target="_blank">@admin</a>.</p>
+
+    </div>
+
+    <div id="qrContainer" class="qrContainer">
+  
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script>
+        let selectedPlan = '';
+        let selectedAmount = '';
+
+        function showInputForm(plan, amount) {
+            selectedPlan = plan;
+            selectedAmount = amount;
+            document.getElementById('userInputModal').style.display = 'block';
+        }
+
+    
+        
+        function validateAndSubmit() {
+            const name = document.getElementById('userName').value;
+            const mobile = document.getElementById('userMobile').value;
+
+            const phonePattern = /^[6-9]\d{9}$/;
+            if (!name || !mobile || !phonePattern.test(mobile)) {
+                alert("Please enter a valid name and mobile number.");
+                return;
+            }
+
+            // Prepare data to send to the backend
+            const data = {
+                name: name,
+                mobile: mobile,
+                plan: selectedPlan,
+                amount: selectedAmount
+            };
+
+            // Send data to Flask backend
+            fetch("/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then(result => {
+                if (result.error) {
+                    alert("Error: " + result.error);
+                } else {
+                    document.getElementById('userInputModal').style.display = 'none';
+                    document.getElementById('confirmationMessage').style.display = 'block';
+                    generateQRCode();
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred while submitting the form. Please check the console for details.");
+            });
+        }
+
+    async function generateQRCode(amount) {
+        const upiID = "Neelrupareliya09@oksbi";
+        const merchantName = "Neel Rupareliya";
+        const transactionID = Date.now().toString();
+
+    // Generate UPI Payment URL
+        const paymentURL = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(merchantName)}&tid=${transactionID}&am=${amount}&cu=INR`;
+
+    // Check if the user is on mobile
+        if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+                window.location.href = paymentURL; // Redirect mobile users to UPI app
+        } else {
+        // Handle Desktop: Show QR Code
+            const qrContainer = document.getElementById("qrContainer");
+            qrContainer.innerHTML = ""; // Clear previous QR code before adding a new one
+
+            const qrCodeCanvas = document.createElement("canvas");
+            qrContainer.appendChild(qrCodeCanvas);
+
+        // Generate QR code
+        QRCode.toCanvas(qrCodeCanvas, paymentURL, { width: 300, height: 300 }, function (error) {
+            if (error) {
+                console.error("Error generating QR code:", error);
+            }
+        });
+    }
+}
+
+    </script>
+</body>
+</html>

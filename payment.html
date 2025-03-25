@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Ensures spacing between sections */
+        }
+        .qr-code img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd; /* Add border to QR code */
+            border-radius: 10px; /* Rounded corners for QR code */
+        }
+        .details {
+            font-size: 1rem;
+            color: #333;
+        }
+        .details strong {
+            color: #0078ff; /* Highlight important details */
+        }
+        .contact-info {
+            font-size: 0.95rem;
+            color: #555;
+        }
+        .contact-info a {
+            color: #0078ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        .back-button {
+            padding: 10px 20px;
+            background-color: #00d4ff;
+            border: none;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        .back-button:hover {
+            background-color: #0078ff;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            .details, .contact-info {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Scan to Pay</h1>
+        <div class="qr-code">
+            <!-- Display the QR code image -->
+            <img src="{{ url_for('static', filename='qrcodes/' + qr_code_filename) }}" alt="QR Code">
+        </div>
+        <div class="details">
+            <p>UPI ID: <strong>Neelrupareliya09@oksbi</strong></p>
+            <p>Plan: <strong>{{ plan.capitalize() }}</strong></p>
+            <p>Amount: <strong>&#8377;{{ amount }}</strong></p>
+        </div>
+        <div class="contact-info">
+            <p>After completing the payment, please contact us on Telegram:</p>
+            <p>
+                <a href="https://t.me/{{ telegram_username }}" target="_blank">@{{ telegram_username }}</a>
+            </p>
+            <p>Share your transaction ID and payment screenshot for confirmation.</p>
+            <p>Transaction ID: <strong>{{ transaction_id }}</strong></p>
+        </div>
+        <button class="back-button" onclick="window.history.back()">Back</button>
+    </div>
+</body>
+</html>
